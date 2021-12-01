@@ -1,0 +1,91 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://espe.edu.ec/arquitectura/soap/tarjetacliente/ws"
+           targetNamespace="http://espe.edu.ec/arquitectura/soap/tarjetacliente/ws" elementFormDefault="qualified">
+
+<xs:element name="obtenerPorNroTarjetaRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="numeroTarjeta" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+ 
+    <xs:element name="obtenerPorNroTarjetaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="tarjetaClienteRS" type="tns:tarjetaClienteRS"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:complexType name="tarjetaClienteRS">
+        <xs:sequence>
+            <xs:element name="codTarjetaCliente" type="xs:string"/>
+            <xs:element name="codTarjetaCredito" type="xs:string"/>
+            <xs:element name="codCliente" type="xs:string"/>
+            <xs:element name="nombreTitular" type="xs:string"/>
+            <xs:element name="estado" type="xs:string"/>
+            <xs:element name="cupoDisponible" type="xs:decimal"/>
+            <xs:element name="cupoTotal" type="xs:decimal"/>
+            <xs:element name="fechaExpedicion" type="xs:dateTime"/>
+            <xs:element name="fechaExpiracion" type="xs:date"/>
+            <xs:element name="transaccionRS" type="tns:transaccionRS" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="transaccionRS">
+        <xs:sequence>
+            <xs:element name="codigo" type="xs:int"/>
+            <xs:element name="codigoTarjetaCliente" type="xs:string"/>
+            <xs:element name="descripcion" type="xs:string"/>
+            <xs:element name="tipo" type="xs:string"/>
+            <xs:element name="mes" type="xs:int"/>
+            <xs:element name="monto" type="xs:decimal"/>
+            <xs:element name="interes" type="xs:decimal"/>
+            <xs:element name="fecha" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:element name="obtenerActivoTarjetaClienteRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codCliente" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+ 
+    <xs:element name="obtenerActivoTarjetaClienteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="tarjetaActivoRS" type="tns:tarjetaActivoRS" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:complexType name="tarjetaActivoRS">
+        <xs:sequence>
+            <xs:element name="codTarjetaCliente" type="xs:string"/>
+            <xs:element name="codTarjetaCredito" type="xs:string"/>
+            <xs:element name="codCliente" type="xs:string"/>
+            <xs:element name="emisor" type="xs:string"/>
+            <xs:element name="estado" type="xs:string"/>
+            <xs:element name="numeroTarjeta" type="xs:string"/>
+            <xs:element name="cupoDisponible" type="xs:decimal"/>
+            <xs:element name="cupoTotal" type="xs:decimal"/>
+            <xs:element name="fechaExpedicion" type="xs:dateTime"/>
+            <xs:element name="fechaExpiracion" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:element name="listarMovimientosActualesRequest">
+        <xs:complexType/>
+    </xs:element>
+ 
+    <xs:element name="listarMovimientosActualesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="tarjetaClienteRS" type="tns:tarjetaClienteRS" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+</xs:schema>
