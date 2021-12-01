@@ -1,0 +1,125 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://espe.edu.ec/arqsoftware/activotarjeta/ws"
+           targetNamespace="http://espe.edu.ec/arqsoftware/activotarjeta/ws" elementFormDefault="qualified">
+    
+    <xs:element name="crearTarjetaClienteRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="tarjetaClienteRQ" type="tns:tarjetaClienteRQ"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="crearTarjetaClienteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="tarjetaClienteRS" type="tns:tarjetaClienteRS"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="listarTransaccionesFechasRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="transaccionRQ" type="tns:transaccionRQ"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="listarTransaccionesFechasResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="transaccionRS" type="tns:transaccionRS" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:complexType name="tarjetaClienteRQ">
+        <xs:sequence>
+            <xs:element name="codigoTarjeta" type="xs:string"/>
+            <xs:element name="codigoCliente" type="xs:string"/>
+            <xs:element name="nombreTitular" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="tarjetaClienteRS">
+        <xs:sequence>
+            <xs:element name="codTarjetaCliente" type="xs:string"/>
+            <xs:element name="codTarjetaCredito" type="xs:string"/>
+            <xs:element name="codCliente" type="xs:string"/>
+            <xs:element name="nombreTitular" type="xs:string"/>
+            <xs:element name="estado" type="xs:string"/>
+            <xs:element name="cupoDisponible" type="xs:decimal"/>
+            <xs:element name="cupoTotal" type="xs:decimal"/>
+            <xs:element name="fechaExpedicion" type="xs:dateTime"/>
+            <xs:element name="fechaExpiracion" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="transaccionRQ">
+        <xs:sequence>
+            <xs:element name="codigoTarjetaCliente" type="xs:string"/>
+            <xs:element name="fechaInicio" type="xs:date"/>
+            <xs:element name="fechaFin" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="transaccionRS">
+        <xs:sequence>
+            <xs:element name="codigo" type="xs:int"/>
+            <xs:element name="codigoTarjetaCliente" type="xs:string"/>
+            <xs:element name="descripcion" type="xs:string"/>
+            <xs:element name="tipo" type="xs:string"/>
+            <xs:element name="mes" type="xs:int"/>
+            <xs:element name="monto" type="xs:decimal"/>
+            <xs:element name="interes" type="xs:decimal"/>
+            <xs:element name="fecha" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:element name="obtenerTodasRequest">
+        <xs:complexType>
+            <xs:sequence />
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="obtenerTodasResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="tarjetaClienteRS" type="tns:tarjetaClienteRS"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="crearTransaccionRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="transaccionRQ" type="tns:transaccionRQ"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+     <xs:element name="crearTransaccionResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="transaccionRS" type="tns:transaccionRS"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+     <xs:element name="listarUltimasTransaccionesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codTarjetaCliente" type="tns:tarjetaClienteRQ"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+     <xs:element name="listarUltimasTransaccionesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="transaccionRS" type="tns:transaccionRS"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+</xs:schema>
