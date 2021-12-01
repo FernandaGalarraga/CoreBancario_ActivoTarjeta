@@ -1,0 +1,42 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://espe.edu.ec/arqsoftware/activotarjeta/ws"
+           targetNamespace="http://espe.edu.ec/arqsoftware/activotarjeta/ws" elementFormDefault="qualified">
+    
+    <xs:element name="crearTarjetaClienteRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="tarjetaClienteRQ" type="tns:tarjetaClienteRQ"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="crearTarjetaClienteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="tarjetaClienteRS" type="tns:tarjetaClienteRS"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:complexType name="tarjetaClienteRQ">
+        <xs:sequence>
+            <xs:element name="codigoTarjeta" type="xs:string"/>
+            <xs:element name="codigoCliente" type="xs:string"/>
+            <xs:element name="nombreTitular" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="tarjetaClienteRS">
+        <xs:sequence>
+            <xs:element name="codTarjetaCliente" type="xs:string"/>
+            <xs:element name="codTarjetaCredito" type="xs:string"/>
+            <xs:element name="codCliente" type="xs:string"/>
+            <xs:element name="nombreTitular" type="xs:string"/>
+            <xs:element name="estado" type="xs:string"/>
+            <xs:element name="cupoDisponible" type="xs:decimal"/>
+            <xs:element name="cupoTotal" type="xs:decimal"/>
+            <xs:element name="fechaExpedicion" type="xs:dateTime"/>
+            <xs:element name="fechaExpiracion" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+</xs:schema>
