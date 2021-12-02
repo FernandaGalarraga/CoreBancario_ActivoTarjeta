@@ -20,12 +20,15 @@ import ec.edu.espe.arqsoftware.cliente.tarjetaactivo.wsdl.TarjetaClienteRQ;
 import ec.edu.espe.arqsoftware.cliente.tarjetaactivo.wsdl.TarjetaClienteRS;
 import java.util.List;
 import javax.xml.datatype.DatatypeConfigurationException;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 
 @Service
 public class TarjetaClienteService extends WebServiceGatewaySupport{
-    private String endpoint = "http://localhost:8090/ws/activotarjeta.wsdl";
+    @Value("${server.cliente.uri}/activotarjeta.wsdl")
+    private String endpoint;
     
     public TarjetaActivoRS crearTarjetaCliente(TarjetaClienteRQ tarjetaCliente) throws DatatypeConfigurationException{
         

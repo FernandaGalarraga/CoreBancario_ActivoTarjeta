@@ -18,12 +18,15 @@ import java.util.List;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 
 @Service
 public class TransaccionService extends WebServiceGatewaySupport{
-    private String endpoint = "http://localhost:8090/ws/transaccion.wsdl";
+    @Value("${server.cliente.uri}/transaccion.wsdl")
+    private String endpoint;
     
     public void crearTransaccion(TransaccionRQ transaccion) throws DatatypeConfigurationException{
         CrearTransaccionRequest request = new CrearTransaccionRequest();
