@@ -50,7 +50,7 @@ public class TarjetaClienteService {
         if (creditoOpt.isPresent()) {
             tarjetaCliente.setCodigo(this.codigoTarjetaCliente());
             tarjetaCliente.setTarjetaCredito(creditoOpt.get());
-            if (obtenerPorCodigo(tarjetaCliente.getCodigo()).isEmpty()) {
+            if (!obtenerPorCodigo(tarjetaCliente.getCodigo()).isPresent()) {
                 tarjetaCliente.setNumeroTarjeta(this.numeroTarjeta(creditoOpt.get().getEmisor()));
                 if (obtenerPorNumeroTarjeta(tarjetaCliente.getNumeroTarjeta()) == null) {
                     if (obtenerPorClienteYTarjeta(tarjetaCliente.getCodigoCliente(), tarjetaCliente.getCodigoTarjetaCredito()) == null) {

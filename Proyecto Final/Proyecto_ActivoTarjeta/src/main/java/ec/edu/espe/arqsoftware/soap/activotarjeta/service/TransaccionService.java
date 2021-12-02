@@ -41,7 +41,7 @@ public class TransaccionService {
     @Transactional
     public void crearTransaccion(Transaccion transaccion) {
         Optional<TarjetaCliente> tarjetaClienteOpt = this.tarjetaClienteRepo.findById(transaccion.getCodigoTarjetaCliente());
-        if (tarjetaClienteOpt.isEmpty()) {
+        if (!tarjetaClienteOpt.isPresent()) {
             throw new CreateException("No existe la tarjeta con codigo: " + transaccion.getCodigoTarjetaCliente());
         }
 
