@@ -12,6 +12,9 @@ import ec.edu.espe.arqsoftware.cliente.tarjetaactivo.wsdl.ObtenerTodasRequest;
 import ec.edu.espe.arqsoftware.cliente.tarjetaactivo.wsdl.TarjetaActivoRS;
 import ec.edu.espe.arqsoftware.cliente.tarjetaactivo.wsdl.TarjetaClienteRQ;
 import ec.edu.espe.arqsoftware.cliente.tarjetaactivo.wsdl.TarjetaClienteRS;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import java.util.List;
 import javax.xml.datatype.DatatypeConfigurationException;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +37,12 @@ public class TarjetaClienteController {
         this.service = service;
     }
     
+    @ApiOperation(value = "Crear una tarjeta de credito de un cliente",
+            notes = "Inserción de una tarjeta de credito")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "OK. La tarjeta de credito se guardo correctamente"),
+        @ApiResponse(code = 400, message = "Bad Request. No se pudo guardar la tarjeta de credito"),
+        @ApiResponse(code = 500, message = "Error inesperado del sistema")})
     @PostMapping
     public ResponseEntity crearTarjetaCliente(@RequestBody TarjetaClienteRQ request) {
         try {
@@ -46,6 +55,12 @@ public class TarjetaClienteController {
         }
     }
     
+    @ApiOperation(value = "Listar datos de la tarjeta por el numero",
+            notes = "Datos de la tarjeta cliente")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "OK. Se encontro la tarjeta del cliente"),
+        @ApiResponse(code = 400, message = "Bad Request. No se encontro ninguna tarjeta"),
+        @ApiResponse(code = 500, message = "Error inesperado del sistema")})
     @GetMapping(value = "/nroTarjeta/{nroTarjeta}")
     public ResponseEntity obtenerPorNroTarjeta(@PathVariable("nroTarjeta") String nroTarjeta) throws DatatypeConfigurationException {
         log.info("Obteniendo tarjeta de credito por numero: {} esperando por resultados", nroTarjeta);
@@ -63,6 +78,12 @@ public class TarjetaClienteController {
         }
     }
 
+    @ApiOperation(value = "Obtiene un tarjeta de credito cliente",
+            notes = "Obtiene tarjetas de credito de un cliente de acuerdo a su codigo ")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "OK, Cuando obtiene una tarjeta de credito cliente de acuerdo a su codigo"),
+        @ApiResponse(code = 404, message = "No existe una tarjeta de credito del codigo del cliente enviado")
+    })
     @GetMapping(value = "/codcliente/{codCliente}")
     public ResponseEntity obtenerActivoTarjetaCliente(@PathVariable("codCliente") String codCliente) {
         try {
@@ -77,6 +98,12 @@ public class TarjetaClienteController {
         }
     }
 
+    @ApiOperation(value = "Listar movimientos de todos los cliente",
+            notes = "Movimientos de las tarjetas de los clientes")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "OK. Se encontraron movimientos"),
+        @ApiResponse(code = 400, message = "Bad Request. No se encontro ningun movimiento"),
+        @ApiResponse(code = 500, message = "Error inesperado del sistema")})
     @GetMapping(value = "/ultimosMovimientos")
     public ResponseEntity listarMovimientosActuales() {
         try {
@@ -95,6 +122,12 @@ public class TarjetaClienteController {
         }
     }
     
+    @ApiOperation(value = "Listar todas las tarjetas",
+            notes = "Datos de la tarjeta del cliente")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "OK. Se encontro la tarjeta del cliente"),
+        @ApiResponse(code = 400, message = "Bad Request. No se encontro ninguna tarjeta"),
+        @ApiResponse(code = 500, message = "Error inesperado del sistema")})
     @GetMapping(value = "/todas")
     public ResponseEntity obtenerTodas() {
         log.info("Obteniendo todas las tarjetas de credito esperando por resultados");

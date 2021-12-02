@@ -10,6 +10,9 @@ import ec.edu.espe.arqsoftware.cliente.tarjetaactivo.exception.FoundException;
 import ec.edu.espe.arqsoftware.cliente.tarjetaactivo.service.TransaccionService;
 import ec.edu.espe.arqsoftware.cliente.tarjetaactivo.wsdl.TransaccionRQ;
 import ec.edu.espe.arqsoftware.cliente.tarjetaactivo.wsdl.TransaccionRS;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
@@ -33,6 +36,12 @@ public class TransaccionController {
         this.service = service;
     }
 
+    @ApiOperation(value = "Crear una transaccion de una tarjeta de un cliente",
+            notes = "Inserción de una transaccion de una tarjeta de un cliente")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "OK. La transacción de credito se guardo correctamente"),
+        @ApiResponse(code = 400, message = "Bad Request. No se pudo guardar la transacción"),
+        @ApiResponse(code = 500, message = "Error inesperado del sistema")})
     @PostMapping
     public ResponseEntity crearTransaccion(@RequestBody TransaccionRQ request) {
         try {
@@ -45,6 +54,12 @@ public class TransaccionController {
         }
     }
 
+    @ApiOperation(value = "Listar transacciones por fecha",
+            notes = "Listar transacciones entre dos fechas con formato yyyy-MM-dd")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "OK. Las transacciones se obtuvieron correctamente"),
+        @ApiResponse(code = 400, message = "Bad Request. El formato de fecha es: yyyy-MM-dd"),
+        @ApiResponse(code = 500, message = "Error inesperado del sistema")})
     @GetMapping(value = "{codTarjetaCliente}/{fechaInicio}/{fechaFin}")
     public ResponseEntity listarTransaccionesFechas(
             @PathVariable("codTarjetaCliente") String codTarjetaCliente,
@@ -69,6 +84,12 @@ public class TransaccionController {
 
     }
 
+    @ApiOperation(value = "Listar últimos movimientos",
+            notes = "Listar últimos movimientos antes de la fecha de corte")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "OK. Las transacciones se obtiene correctamente"),
+        @ApiResponse(code = 400, message = "Bad Request. El formato de fecha es: yyyy-MM-dd"),
+        @ApiResponse(code = 500, message = "Error inesperado del sistema")})
     @GetMapping(value = "/movimientosActuales/{codTarjetaCliente}")
     public ResponseEntity listarUltimasTransacciones(@PathVariable("codTarjetaCliente") String codTarjetaCliente) {
 
